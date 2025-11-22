@@ -1,3 +1,4 @@
-#To run project
+## To run project
+```bash
 npm run dev
 
