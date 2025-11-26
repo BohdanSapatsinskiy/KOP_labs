@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDeck } from "./useDeck";
 import type { Card } from "./useDeck";
+import { useSettings } from "../context/SettingsContext";
 
 export const useBlackjack = () => {
   const { deck, drawCard, resetDeck } = useDeck();
@@ -11,6 +12,9 @@ export const useBlackjack = () => {
   const [playerTurn, setPlayerTurn] = useState(true);
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState<string>("");
+
+  const { difficulty } = useSettings();
+
 
   const calculateScore = (cards: Card[]): number => {
     let total = 0;
@@ -73,14 +77,18 @@ export const useBlackjack = () => {
     }
   };
 
-
   const playerStand = () => {
     if (!playerTurn || gameOver) return;
 
     setPlayerTurn(false);
-    dealerTurn();
-  };
 
+    // Виклик дилера залежно від складності
+    if (difficulty === "hard") {
+      dealerTurnHard();
+    } else {
+      dealerTurn();
+    }
+  };
 
   const dealerTurn = () => {
     setMessage("Дилер думає...");
@@ -101,6 +109,41 @@ export const useBlackjack = () => {
     if (dealerScore > 21) {
       setMessage("Дилер перебрав! Ви виграли!");
     } else if (playerScore > dealerScore) {
+      setMessage("Ви виграли!");
+    } else if (playerScore < dealerScore) {
+      setMessage("Дилер виграв!");
+    } else {
+      setMessage("Нічия.");
+    }
+
+    setGameOver(true);
+  };
+
+  const dealerTurnHard = () => {
+    setMessage("Дилер сильно задумався...");
+
+    let cards = [...dealerCards];
+
+    // Ділер добирає карти, поки не буде >=19 і <=21
+    while (calculateScore(cards) < 19) {
+      const card = drawCard();
+      if (!card) break;
+      cards.push(card);
+
+      const score = calculateScore(cards);
+      // якщо перевищив 21 — видаляємо останню карту і стоп
+      if (score > 21) {
+        cards.pop();
+        break;
+      }
+    }
+
+    setDealerCards(cards);
+
+    const playerScore = calculateScore(playerCards);
+    const dealerScore = calculateScore(cards);
+
+    if (playerScore > dealerScore) {
       setMessage("Ви виграли!");
     } else if (playerScore < dealerScore) {
       setMessage("Дилер виграв!");
