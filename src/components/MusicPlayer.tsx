@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { useSettings } from "../context/SettingsContext";
+
+import { useZustandStore } from "../hooks/useZustandStore";
 
 const MusicPlayer = ({ src }: { src: string }) => {
-  const { volume } = useSettings();
+  const { volume } = useZustandStore();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [started, setStarted] = useState(false);
 

@@ -1,7 +1,8 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSettings } from "../context/SettingsContext";
+import { useZustandStore } from "../hooks/useZustandStore";
+
 import Button from "../components/Button";
 
 import bg from "../assets/background/main-background.png"
@@ -13,7 +14,7 @@ const SettingsSchema = Yup.object().shape({
 });
 
 const SettingsPage = () => {
-  const { difficulty, volume, setDifficulty, setVolume } = useSettings();
+  const { difficulty, volume, setDifficulty, setVolume } = useZustandStore();
   const navigate = useNavigate();
   const { userId } = useParams();
 

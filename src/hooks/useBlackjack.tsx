@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDeck } from "./useDeck";
 import type { Card } from "./useDeck";
-import { useSettings } from "../context/SettingsContext";
+
+import { useZustandStore } from "./useZustandStore";
 import { useGameResults } from "../hooks/useGameResults";
 
 export const useBlackjack = () => {
@@ -14,7 +15,7 @@ export const useBlackjack = () => {
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState<string>("");
 
-  const { difficulty } = useSettings();
+  const { difficulty } = useZustandStore();
 
   const { addResult } = useGameResults();
 

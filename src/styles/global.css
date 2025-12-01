@@ -15,12 +15,14 @@ button{
     background: none;
     border: none;
     color: whitesmoke;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
 }
 body{
     width: 100vw;
     height: 100vh;
     color: whitesmoke;
-    font-family: 'Courier New', Courier, monospace;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .game-table {
     height: 100%;
