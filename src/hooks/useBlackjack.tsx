@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useDeck } from "./useDeck";
 import type { Card } from "./useDeck";
 import { useSettings } from "../context/SettingsContext";
+import { useGameResults } from "../hooks/useGameResults";
 
 export const useBlackjack = () => {
-  const { deck, drawCard, resetDeck } = useDeck();
+  const { deck, drawCard, resetDeck, setDeck } = useDeck();
 
   const [playerCards, setPlayerCards] = useState<Card[]>([]);
   const [dealerCards, setDealerCards] = useState<Card[]>([]);
@@ -15,6 +16,7 @@ export const useBlackjack = () => {
 
   const { difficulty } = useSettings();
 
+  const { addResult } = useGameResults();
 
   const calculateScore = (cards: Card[]): number => {
     let total = 0;
@@ -40,13 +42,14 @@ export const useBlackjack = () => {
   };
 
   const startGame = () => {
-    resetDeck();
-    setMessage("");
+    const newDeck = resetDeck();
 
-    const p1 = drawCard();
-    const p2 = drawCard();
-    const d1 = drawCard();
-    const d2 = drawCard();
+
+
+    const p1 = newDeck[0];
+    const p2 = newDeck[1];
+    const d1 = newDeck[2];
+    const d2 = newDeck[3];
 
     if (!p1 || !p2 || !d1 || !d2) {
       setMessage("Deck error");
@@ -55,6 +58,8 @@ export const useBlackjack = () => {
 
     setPlayerCards([p1, p2]);
     setDealerCards([d1, d2]);
+
+    setDeck(newDeck.slice(4));
 
     setPlayerTurn(true);
     setGameOver(false);
@@ -91,8 +96,6 @@ export const useBlackjack = () => {
   };
 
   const dealerTurn = () => {
-    setMessage("Дилер думає...");
-
     let cards = [...dealerCards];
 
     while (calculateScore(cards) < 17) {
@@ -107,21 +110,20 @@ export const useBlackjack = () => {
     const dealerScore = calculateScore(cards);
 
     if (dealerScore > 21) {
-      setMessage("Дилер перебрав! Ви виграли!");
+      setMessage("Я перебрав! Ви виграли!");
     } else if (playerScore > dealerScore) {
       setMessage("Ви виграли!");
     } else if (playerScore < dealerScore) {
-      setMessage("Дилер виграв!");
+      setMessage("Я виграв!");
     } else {
       setMessage("Нічия.");
     }
 
     setGameOver(true);
+    addResult(calculateScore(playerCards), calculateScore(cards));
   };
 
   const dealerTurnHard = () => {
-    setMessage("Дилер сильно задумався...");
-
     let cards = [...dealerCards];
 
     // Ділер добирає карти, поки не буде >=19 і <=21
@@ -146,12 +148,13 @@ export const useBlackjack = () => {
     if (playerScore > dealerScore) {
       setMessage("Ви виграли!");
     } else if (playerScore < dealerScore) {
-      setMessage("Дилер виграв!");
+      setMessage("Я виграв!");
     } else {
       setMessage("Нічия.");
     }
 
     setGameOver(true);
+    addResult(calculateScore(playerCards), calculateScore(cards));
   };
 
   return {

@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { useBlackjack } from "../hooks/useBlackjack";
 import Hand from "../components/Hand";
 import Button from "../components/Button";
 import GameOverModal from "../components/GameOverModal";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function GamePage() {
+const GamePage = () => {
   const {
     playerCards,
     dealerCards,
@@ -17,27 +19,43 @@ export default function GamePage() {
     playerStand,
   } = useBlackjack();
 
+  const navigate = useNavigate();
+  const { userId } = useParams();
+
+  useEffect(() => {
+    startGame();
+  }, []);
+
   return (
-    <div>
-      <h1>Blackjack</h1>
+    <div
+      className="game-table"
+      style={{
+        backgroundImage: "url(/src/assets/background/game-background.png)",
+        backgroundSize: "contain",
+      }}
+    >
 
-      <Button onClick={startGame}>Start</Button>
-
-      <Hand title="Player" cards={playerCards} score={playerScore} />
-
-      <Button onClick={playerHit} disabled={!playerTurn || gameOver}>Hit</Button>
-      <Button onClick={playerStand} disabled={!playerTurn || gameOver}>Stand</Button>
-
-      <Hand
-        title="Dealer"
-        cards={dealerCards}
-        score={dealerScore}
-        hideSecondCard={playerTurn && !gameOver}
+      <div
+        className="deck"
+        onClick={() => {
+          if (playerTurn && !gameOver) playerHit();
+        }}
+        style={{ cursor: playerTurn && !gameOver ? "pointer" : "default" }}
       />
 
-      <h2>{message}</h2>
+      <div className="hand hand-diller">
+        <Hand
+          title="Dealer"
+          cards={dealerCards}
+          score={dealerScore}
+          hideSecondCard={playerTurn && !gameOver}
+        />
+      </div>
 
-      {/* Портал-модалка для завершення гри */}
+      <div className="hand hand-player">
+        <Hand title="Player" cards={playerCards} score={playerScore} />
+      </div>
+
       <GameOverModal
         isOpen={gameOver}
         onRestart={startGame}
@@ -45,6 +63,24 @@ export default function GamePage() {
         dealerScore={dealerScore}
         message={message}
       />
+
+      <div className="btn-panel">
+        <Button
+          className="spec-btn"
+          onClick={() => navigate(`/${userId}/`)}
+        >
+          Back to MENU
+        </Button>
+
+        <Button
+          className="spec-btn"
+          onClick={() => playerStand()}
+          disabled={!playerTurn || gameOver}
+        >
+          Open
+        </Button>
+      </div>
     </div>
   );
 }
+export default GamePage;

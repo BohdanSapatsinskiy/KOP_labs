@@ -9,7 +9,7 @@ createRoot(document.getElementById('root')!).render(
 
   <StrictMode>
       <SettingsProvider>
-        <MusicPlayer src="/assets/music/chill.mp3" />
+        <MusicPlayer src="src/assets/music/chill.mp3" />
         <App />
     </SettingsProvider>
   </StrictMode>,

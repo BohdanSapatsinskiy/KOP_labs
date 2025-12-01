@@ -24,7 +24,7 @@ const generateDeck = (): Card[] => {
       deck.push({
         rank,
         suit,       
-        image: `/assets/cards/${rank}_of_${suit}.png`
+        image: `/src/assets/card/front/${rank}_of_${suit}.png`
       });
     }
   }
@@ -48,17 +48,20 @@ export const useDeck = () => {
     if (deck.length === 0) return null;
 
     const card = deck[0];
-    setDeck((prev) => prev.slice(1));
+    setDeck(prev => prev.slice(1));
     return card;
   };
 
-  const resetDeck = () => {
-    setDeck(shuffle(generateDeck()));
+  const resetDeck = (): Card[] => {
+    const newDeck = shuffle(generateDeck());
+    setDeck(newDeck);
+    return newDeck;
   };
 
   return {
     deck,
     drawCard,
-    resetDeck
+    resetDeck,
+    setDeck
   };
 };

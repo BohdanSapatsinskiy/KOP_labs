@@ -1,25 +1,167 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+*{
+    margin: 0;
+    padding: 0;
+}
+.app-root {
+  width: 100%;
+  height: 100%;
+}
+td, th{
+    margin: 3px;
+    text-align: center;
 }
 
-.start-page,
-.game-page,
-.results-page {
-  width: 100vw;
-  height: 100vh;
-  color: white;
+button{
+    background: none;
+    border: none;
+    color: whitesmoke;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+}
+.game-table {
+    height: 100%;
+    width: 100%;   
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(13, 26, 33);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.hand-player{
+    height: 200px;
+    position:absolute;
+    bottom: 0;
+}
+.hand{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.hand-diller{
+    width: 100%;
+    height: 124px;
+    margin-bottom: 10%;
+}
+.hand-player .card:hover{
+    margin-bottom: 100px;
+    cursor: pointer;
+}
+
+.card{
+    height: 100%;
+    width: auto;
+    margin: 5px;
+}
+
+.deck {
+    width: 84px;
+    height: 120px;
+    background: url(../assets/card/back/card_back_1.png) center/cover no-repeat;
+    position: absolute; 
+    top: 18%;  
+    left: 68.3%; 
+    cursor: pointer;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  z-index: 1000;
 }
 
-.btn {
-  padding: 10px 20px;
-  background: black;
-  color: white;
-  border: none;
-  cursor: pointer;
+.diller-block{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.65);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:end;
+    align-items: end;
+
+}
+.diller{
+    height: 500px;
+    width: 500px;
+    display: block;
+
+}
+.diller:focus {
+  outline: none;
+}
+.diller-message{
+    position: absolute;
+    width: 500px;
+    height: 150px;
+    background-image: url(../assets/message-border.png);
+    background-size:contain;        
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+
+    color:  black;
+
+    margin-right: 21%;
+    margin-bottom: 20%;
+}
+.message-text{
+    margin: 10px;
+    font-size: 24px;
+}
+.spec-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 80px;
+    margin: 5px;
+    background-image: url(../assets/Button.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+.spec-btn:hover{
+    background-image: url(../assets/Button-2.png);
+}
+
+.result-table{
+    width: 580px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+.table-item{
+    margin: 10px;
+    font-size: 24px;
+    display:block;
+}
+.btn-panel{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
 }

@@ -5,17 +5,17 @@ type CardProps = {
   className?: string;   // додаткові стилі
 };
 
-const defaultBack = "/assets/card/back/file.png";
+const defaultBack = "/src/assets/card/back/card_back_1.png";
 
-const Card = ({ front, back = defaultBack, isFaceUp = true, className }: CardProps) => {
+const Card = ({ front, back = defaultBack, isFaceUp = true}: CardProps) => {
   return (
-    <div className={`card ${className ?? ""}`}>
+
       <img
         src={isFaceUp ? front : back}
         alt="card"
-        className="w-20 h-28 object-cover rounded shadow"
+        className="card"
       />
-    </div>
+
   );
 };
 
