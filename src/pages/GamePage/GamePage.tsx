@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-import { useBlackjack } from "../hooks/useBlackjack";
-import Hand from "../components/Hand";
-import Button from "../components/Button";
-import GameOverModal from "../components/GameOverModal";
+import { useBlackjack } from "../../hooks/useBlackjack";
+import Hand from "../../components/Hand";
+import Button from "../../components/Button/Button";
+import GameOverModal from "../../components/GameOverModal/GameOverModal";
 import { useNavigate, useParams } from "react-router-dom";
+
+import styles from './GamePage.module.css';
 
 const GamePage = () => {
   const {
@@ -28,7 +30,7 @@ const GamePage = () => {
 
   return (
     <div
-      className="game-table"
+      className="table"
       style={{
         backgroundImage: "url(/src/assets/background/game-background.png)",
         backgroundSize: "contain",
@@ -36,14 +38,14 @@ const GamePage = () => {
     >
 
       <div
-        className="deck"
+        className={styles["deck"]}
         onClick={() => {
           if (playerTurn && !gameOver) playerHit();
         }}
         style={{ cursor: playerTurn && !gameOver ? "pointer" : "default" }}
       />
 
-      <div className="hand hand-diller">
+      <div className={`${styles["hand"]} ${styles["hand-diller"]}`}>
         <Hand
           title="Dealer"
           cards={dealerCards}
@@ -52,7 +54,7 @@ const GamePage = () => {
         />
       </div>
 
-      <div className="hand hand-player">
+      <div className={`${styles["hand"]} ${styles["hand-player"]}`}>
         <Hand title="Player" cards={playerCards} score={playerScore} />
       </div>
 
@@ -66,14 +68,12 @@ const GamePage = () => {
 
       <div className="btn-panel">
         <Button
-          className="spec-btn"
           onClick={() => navigate(`/${userId}/`)}
         >
           Back to MENU
         </Button>
 
         <Button
-          className="spec-btn"
           onClick={() => playerStand()}
           disabled={!playerTurn || gameOver}
         >

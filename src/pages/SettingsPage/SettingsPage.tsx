@@ -1,11 +1,11 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import { useZustandStore } from "../hooks/useZustandStore";
+import { useZustandStore } from "../../hooks/useZustandStore";
 
-import Button from "../components/Button";
+import Button from "../../components/Button/Button";
 
-import bg from "../assets/background/main-background.png"
+import bg from "../../assets/background/main-background.png"
 
 
 const SettingsSchema = Yup.object().shape({
@@ -20,7 +20,7 @@ const SettingsPage = () => {
 
   return (
     <div
-        className="game-table"
+        className="table"
         style={{
           backgroundImage: `url(${bg})`,
           backgroundSize: 'cover',
@@ -56,7 +56,7 @@ const SettingsPage = () => {
                 <Field type="range" name="volume" min="0" max="100" style={{width:"200px"}} />
               </div>
               <div className="table-item">
-                <Button type="submit" className="spec-btn" style={{width: "150px", height: "80px" }}>
+                <Button type="submit" style={{width: "150px", height: "80px" }}>
                   Зберегти
                 </Button>
               </div>
@@ -67,7 +67,6 @@ const SettingsPage = () => {
 
 
       <Button
-        className="spec-btn"
         style={{ position: "absolute", bottom: 0, marginBottom: "60px" }}
         onClick={() => navigate(`/${userId}/`)}
       >

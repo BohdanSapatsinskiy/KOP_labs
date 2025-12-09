@@ -1,3 +1,5 @@
+import styles from './Card.module.css';
+
 type CardProps = {
   front: string;        // шлях до лиць
   back?: string; // шлях до заду
@@ -13,7 +15,7 @@ const Card = ({ front, back = defaultBack, isFaceUp = true}: CardProps) => {
       <img
         src={isFaceUp ? front : back}
         alt="card"
-        className="card"
+        className={styles["card"]}
       />
 
   );

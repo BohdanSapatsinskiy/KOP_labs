@@ -1,13 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import { useGameResults } from "../hooks/useGameResults";
+import { useNavigate, useParams } from "react-router-dom";
+import { useGameResults } from "../../hooks/useGameResults";
+import Button from "../../components/Button/Button";
 
 const ResultsPage = () => {
+  const { userId } = useParams();
   const { results } = useGameResults();
   const navigate = useNavigate();
 
   return (
     <div
-      className="game-table"
+      className="table"
       style={{
         backgroundImage: 'url(/src/assets/background/main-background.png)',
         backgroundSize: 'cover',
@@ -49,6 +51,12 @@ const ResultsPage = () => {
       >
         Back to MENU
       </div>
+      <Button
+        style={{ position: "absolute", bottom: 0, marginBottom: "60px" }}
+        onClick={() => navigate(`/${userId}/`)}
+      >
+        Back to MENU
+      </Button>
     </div>
   );
 };

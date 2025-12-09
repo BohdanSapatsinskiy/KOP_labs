@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './Button.module.css';
 
 type BaseProps = {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   ...rest
 }) => {
-  const cls = className ?? "";
+  const cls = className ?? `${styles["spec-btn"]}`;
 
   return (
     <button

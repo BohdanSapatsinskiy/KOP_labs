@@ -1,0 +1,16 @@
+.spec-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 80px;
+    margin: 5px;
+    background-image: url(../../assets/Button.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+.spec-btn:hover{
+    background-image: url(../../assets/Button-2.png);
+}

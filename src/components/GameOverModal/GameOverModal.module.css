@@ -1,0 +1,50 @@
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.diller-block{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.65);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:end;
+    align-items: end;
+
+}.diller{
+    height: 500px;
+    width: 500px;
+    display: block;
+
+}
+.diller:focus {
+  outline: none;
+}
+.diller-message{
+    position: absolute;
+    width: 500px;
+    height: 150px;
+    background-image: url(../../assets/message-border.png);
+    background-size:contain;        
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+
+    color:  black;
+
+    margin-right: 21%;
+    margin-bottom: 20%;
+}
+.message-text{
+    margin: 10px;
+    font-size: 24px;
+}

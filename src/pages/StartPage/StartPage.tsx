@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../../components/Button/Button";
 
-import bg from "../assets/background/main-background.png"
+import bg from "../../assets/background/main-background.png"
 
 const StartPage = () => {
     const navigate = useNavigate();
@@ -9,28 +9,25 @@ const StartPage = () => {
 
     return (
         <div
-            className="game-table"
+            className="table"
             style={{
                 backgroundImage: `url(${bg})`,
                 backgroundSize: 'cover',
             }}
         >
             <Button
-                className="spec-btn"
                 onClick={() => navigate(`/${userId}/game`)}
             >
                 START
             </Button>
 
             <Button
-                className="spec-btn"
                 onClick={() => navigate(`/${userId}/settings`)}
             >
                 SETTINGS
             </Button>
 
             <Button
-                className="spec-btn"
                 onClick={() => navigate(`/${userId}/results`)}
             >
                 RESULTS
