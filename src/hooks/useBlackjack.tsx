@@ -98,14 +98,17 @@ export const useBlackjack = () => {
 
   const dealerTurn = () => {
     let cards = [...dealerCards];
+    let tempDeck = [...deck];
 
     while (calculateScore(cards) < 17) {
-      const card = drawCard();
+      if (tempDeck.length === 0) break;
+      const card = tempDeck.shift();
       if (!card) break;
       cards.push(card);
     }
 
     setDealerCards(cards);
+    setDeck(tempDeck);
 
     const playerScore = calculateScore(playerCards);
     const dealerScore = calculateScore(cards);
@@ -121,42 +124,47 @@ export const useBlackjack = () => {
     }
 
     setGameOver(true);
-    addResult(calculateScore(playerCards), calculateScore(cards));
+    addResult(playerScore, dealerScore);
   };
 
-  const dealerTurnHard = () => {
-    let cards = [...dealerCards];
 
-    // Ділер добирає карти, поки не буде >=19 і <=21
-    while (calculateScore(cards) < 19) {
-      const card = drawCard();
-      if (!card) break;
-      cards.push(card);
+const dealerTurnHard = () => {
+  let cards = [...dealerCards];
+  let tempDeck = [...deck];
 
-      const score = calculateScore(cards);
-      // якщо перевищив 21 — видаляємо останню карту і стоп
-      if (score > 21) {
-        cards.pop();
-        break;
-      }
+  while (calculateScore(cards) < 19 && tempDeck.length > 0) {
+    const nextCard = tempDeck.shift();
+    if (!nextCard) break;
+
+    const potentialScore = calculateScore([...cards, nextCard]);
+
+    if (potentialScore > 21) {
+      continue;
     }
+    cards.push(nextCard);
+  }
 
-    setDealerCards(cards);
+  setDealerCards(cards);
+  setDeck(tempDeck);
 
-    const playerScore = calculateScore(playerCards);
-    const dealerScore = calculateScore(cards);
+  const playerScore = calculateScore(playerCards);
+  const dealerScore = calculateScore(cards);
 
-    if (playerScore > dealerScore) {
-      setMessage("Ви виграли!");
-    } else if (playerScore < dealerScore) {
-      setMessage("Я виграв!");
-    } else {
-      setMessage("Нічия.");
-    }
+  if (dealerScore > 21) {
+    setMessage("Я перебрав! Ви виграли!");
+  } else if (playerScore > dealerScore) {
+    setMessage("Ви виграли!");
+  } else if (playerScore < dealerScore) {
+    setMessage("Я виграв!");
+  } else {
+    setMessage("Нічия.");
+  }
 
-    setGameOver(true);
-    addResult(calculateScore(playerCards), calculateScore(cards));
-  };
+  setGameOver(true);
+  addResult(playerScore, dealerScore);
+};
+
+
 
   return {
     deck,
