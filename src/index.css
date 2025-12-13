@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.app-root {
+  width: 100%;
+  height: 100%;
+}
+td, th{
+    margin: 3px;
+    text-align: center;
+}
+
+button{
+    background: none;
+    border: none;
+    color: whitesmoke;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    color: whitesmoke;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.btn-panel{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+}

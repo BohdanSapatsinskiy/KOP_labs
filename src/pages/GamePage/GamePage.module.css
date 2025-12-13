@@ -1,0 +1,31 @@
+.hand-player{
+    height: 200px;
+    position:absolute;
+    bottom: 0;
+}
+.hand{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.hand-diller{
+    width: 100%;
+    height: 124px;
+    margin-bottom: 10%;
+}
+.hand-player .card:hover{
+    margin-bottom: 100px;
+    cursor: pointer;
+}
+
+.deck {
+    width: 120px;
+    height: 160px;
+    background: url(../../assets/card/back/card_back_1.png) center/cover no-repeat;
+    position: absolute; 
+    top: 7%;  
+    left: 73.7%; 
+    cursor: pointer;
+}

@@ -1,23 +1,21 @@
+import BasePage from "../../components/BasePage/BasePage";
+import Button from "../../components/Button/Button";
+import bg from "../../assets/background/main-background.png";
 import { useNavigate } from "react-router-dom";
-import { useGameResults } from "../hooks/useGameResults";
+import { useGameResults } from "../../hooks/useGameResults";
+import styles from './ResultPage.module.css';
 
 const ResultsPage = () => {
   const { results } = useGameResults();
   const navigate = useNavigate();
 
   return (
-    <div
-      className="game-table"
-      style={{
-        backgroundImage: 'url(/src/assets/background/main-background.png)',
-        backgroundSize: 'cover',
-      }}
-    >
-      <div className="result-table">
+    <BasePage background={bg}>
+      <div className={styles["result-table"]}>
         {results.length === 0 ? (
           <div className="table-item">Немає результатів</div>
         ) : (
-          <table className="table-item">
+          <table className={styles["table-item"]}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -42,14 +40,10 @@ const ResultsPage = () => {
         )}
       </div>
 
-      <div
-        className="spec-btn"
-        style={{ position: "absolute", bottom: 0, marginBottom: "60px" }}
-        onClick={() => navigate("/")}
-      >
-        Back to MENU
+      <div className="btn-panel">
+        <Button onClick={() => navigate("/")}>Back to MENU</Button>
       </div>
-    </div>
+    </BasePage>
   );
 };
 

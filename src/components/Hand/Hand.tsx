@@ -1,5 +1,5 @@
-import Card from "./Card";
-import type { Card as CardType } from "../hooks/useDeck";
+import Card from "../Card/Card";
+import type { Card as CardType } from "../../hooks/useDeck";
 
 type Props = {
   title?: string;

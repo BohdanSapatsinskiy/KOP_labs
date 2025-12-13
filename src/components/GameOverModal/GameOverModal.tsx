@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom";
-import Button from "./Button";
+import Button from "../Button/Button";
+import styles from './GameOverModal.module.css';
+
 
 type Props = {
   isOpen: boolean;
@@ -13,16 +15,16 @@ const GameOverModal = ({ isOpen, onRestart, playerScore, dealerScore, message }:
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(    
-    <div className="modal-overlay">
-        <div className="diller-block">
-          <img className="diller" src="/src/assets/diller.png" alt="Дилер" />
-          <div className="diller-message">
-            <div className="message-text">
+    <div className={styles["modal-overlay"]}>
+        <div className={styles["diller-block"]}>
+          <img className={styles["diller"]} src="/src/assets/diller.png" alt="Дилер" />
+          <div className={styles["diller-message"]}>
+            <div className={styles["message-text"]}>
               <p>{message}</p>
               <p>Ваш рахунок: {playerScore}</p>
               <p>Мій рахунок: {dealerScore}</p>
             </div>
-              <Button className="spec-btn" onClick={onRestart}>Restart</Button>
+              <Button onClick={onRestart}>Restart</Button>
           </div>
         </div>
     </div>,
